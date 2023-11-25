@@ -1,0 +1,97 @@
+-- DROP DATABASE IF EXISTS empsalarydb;
+-- CREATE DATABASE IF NOT EXISTS empsalarydb;
+-- USE empsalarydb;
+--
+-- DROP TABLE IF EXISTS employee,
+--     departments,
+--     employee_salary,
+--     users;
+-- ###ddls###
+--
+-- ##USERS
+-- create table users(
+--                       usr_id int auto_increment primary key,
+--                       usr_email varchar(255),
+--                       usr_name varchar(255) not null,
+--                       usr_password varchar(255) not null,
+--                       usr_type varchar(255) not null
+-- );
+--
+--
+-- ##DEPARTMENTS
+-- create table departments(
+--                             department_id INT AUTO_INCREMENT PRIMARY KEY,
+--                             name varchar(255) not null,
+--                             capacity int not null
+-- );
+--
+--
+-- ##EMPLOYEE
+-- create table employee(
+--                          employee_id INT AUTO_INCREMENT PRIMARY KEY,
+--                          first_name varchar(255) not null,
+--                          last_name varchar(255),
+--                          email varchar(255) not null unique,
+--                          title varchar(255),
+--                          photograph_path varchar(255),
+--                          dept_id int
+-- );
+--
+-- ##EMPLOYEE_SALARY
+-- create table employee_salary(
+--                                 salary_id int AUTO_INCREMENT PRIMARY KEY,
+--                                 employee_id int not null unique,
+--                                 amount int,
+--                                 description varchar(255),
+--                                 payment_date date not null
+-- );
+--
+--
+-- ###ALTER FKS
+--
+-- alter table employee add constraint fk_usr_emp_relation FOREIGN KEY (email) REFERENCES users(usr_email);
+--
+--
+-- alter table employee add constraint fk_department FOREIGN KEY (dept_id) REFERENCES departments(department_id);
+--
+-- alter table employee_salary add constraint fk_emp_salary FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
+--
+--
+--
+-- ###DATA
+--
+--
+-- INSERT INTO users (usr_id, usr_name, usr_email, usr_password, usr_type) VALUES
+-- (1, 'John Doe', 'john.doe@example.com', 'password123', 'admin'),
+-- (2, 'Jane Smith', 'jane.smith@example.com', 'pass456', 'accounts'),
+-- (3, 'Bob Johnson', 'bob.johnson@example.com', 'secure789', 'user'),
+-- (4, 'Alice Williams', 'alice.williams@example.com', '12345pass', 'admin'),
+-- (5, 'Charlie Brown', 'charlie.brown@example.com', 'securepass', 'ACCOUNTS');
+--
+--
+--
+-- INSERT INTO departments (department_id, name, capacity) VALUES
+--                                                             (1, 'Computer Science', 25),
+--                                                             (2, 'Mathematics', 30),
+--                                                             (3, 'Physics', 20),
+--                                                             (4, 'Chemistry', 30),
+--                                                             (5, 'Biology', 45);
+--
+--
+-- INSERT INTO employee (employee_id, first_name, last_name, email, title, photograph_path, dept_id) VALUES
+--                                                                                                       (1,'John', 'Doe', 'john.doe@example.com', 'Professor', '/photos/john_doe.jpg', 1),
+--                                                                                                       (2,'Jane', 'Smith', 'jane.smith@example.com', 'Assistant Professor', '/photos/jane_smith.jpg', 2),
+--                                                                                                       (3,'Bob', 'Johnson', 'bob.johnson@example.com', 'Associate Professor', '/photos/bob_johnson.jpg', 3),
+--                                                                                                       (4,'Alice', 'Williams', 'alice.williams@example.com', 'Lecturer', '/photos/alice_williams.jpg', 4),
+--                                                                                                       (5,'Charlie', 'Brown', 'charlie.brown@example.com', 'Senior Lecturer', '/photos/charlie_brown.jpg', 5);
+--
+--
+-- INSERT INTO employee_salary (salary_id, employee_id, amount, description, payment_date) VALUES
+--                                                                                             (1,1, 5000, 'Monthly salary', '2023-11-01'),
+--                                                                                             (2,2, 4500, 'Monthly salary', '2023-11-01'),
+--                                                                                             (3,3, 4800, 'Monthly salary', '2023-11-01'),
+--                                                                                             (4,4, 4000, 'Monthly salary', '2023-11-01'),
+--                                                                                             (5,5, 4200, 'Monthly salary', '2023-11-01');
+--
+--
+--
